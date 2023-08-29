@@ -2,7 +2,7 @@
 
 describe("Central de Atendimento ao Cliente TAT", () => {
   beforeEach(() => {
-    cy.visit("http://127.0.0.1:5500/src/index.html");
+    cy.visit("src/index.html");
   });
 
   //--------------- Link de politica de privacidade -----------------------
@@ -23,7 +23,7 @@ describe("Central de Atendimento ao Cliente TAT", () => {
   //visitar a pagina de privacidade
   it.only("testa a página da política de privacidade de forma independente", () => {
   
-    cy.visit("http://127.0.0.1:5500/src/privacy.html");
+    cy.visit("src/privacy.html");
     
     cy.contains("CAC TAT - Política de privacidade").should("be.visible");
 
