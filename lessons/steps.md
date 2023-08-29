@@ -1,0 +1,2 @@
+1- execute o comando `npx cypress open` para abrir o Cypress pela primeira vez
+2- No terminal de linha de comando, na raiz do projeto (ou no atalho do VS Code), execute o comando `npm run cy:open`, para abrir o _Test Runner_ e executar o novo teste em modo interativo.
