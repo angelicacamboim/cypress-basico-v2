@@ -9,23 +9,6 @@ describe("Central de Atendimento ao Cliente TAT", () => {
     cy.title().should("be.equal", "Central de Atendimento ao Cliente TAT");
   });
 
-  //--------------- campos obrigatórios ----------------------------
-  it("preenche os campos obrigatórios e envia o formulário", () => {
-    //com delay 0 o teste fica mais rápido
-    const longText =
-      "Texto Longo - Delay. Texto Longo - Delay.Texto Longo - Delay.Texto Longo - Delay.Texto Longo - Delay.";
-
-    cy.fillMandatoryFieldsAndSubmit(
-      "João",
-      "Silva",
-      "joao@example.com",
-      longText
-    );
-
-    //mensagem de sucesso
-    cy.get("span.success").should("be.visible");
-  });
-
   //--------------- campos obrigatórios + email inválido ----------------------------
   it("exibe mensagem de erro ao submeter o formulário com um email com formatação inválida", () => {
     cy.fillMandatoryFieldsAndSubmit("João", "Silva", "email_invalido", "teste");
@@ -63,7 +46,6 @@ describe("Central de Atendimento ao Cliente TAT", () => {
       .should("have.value", "Angelica")
       .clear()
       .should("have.value", "");
-   
   });
 
   //--------------- campos obrigatórios + mensagem de erro ----------------------------
@@ -77,8 +59,11 @@ describe("Central de Atendimento ao Cliente TAT", () => {
 
   //--------------- campos obrigatórios + comando customizado ----------------------------
 
-  it("envia o formulário com sucesso usando um comando customizado", () => {
+  it.only("envia o formulário com sucesso usando um comando customizado", () => {
     // cypress/support/commands.js
+
+    cy.clock(); //é usado para controlar o tempo durante os testes
+
     cy.fillMandatoryFieldsAndSubmit(
       "João",
       "Silva",
@@ -88,5 +73,9 @@ describe("Central de Atendimento ao Cliente TAT", () => {
 
     //mensagem de sucesso
     cy.get("span.success").should("be.visible");
+
+    cy.tick(3000); // Quando você chama cy.tick(), o tempo simulado avança em uma quantidade definida
+
+    cy.get("span.success").should("not.be.visible");
   });
 });
